@@ -3,6 +3,14 @@
 # stop on error
 set -e
 
+# ensure we have a path to an existing source file
+[ -f "${1}" ] || {
+    echo " usage:"
+    echo "    as a shebang in your C file: #!/usr/bin/env crun"
+    echo "    direct invocation:           crun filename.c"
+    exit 1
+}
+
 # global vars
 MAIN_DIR=$(dirname ${1})
 
