@@ -1,4 +1,5 @@
 #!/usr/bin/env crun
+
 #include <stdio.h>
 
 int main(void) {

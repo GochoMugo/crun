@@ -24,6 +24,7 @@ OUT_DIR="/tmp/crun/"
 OUT_NAME="$(echo ${ABS_PATH} | sed s'/\//./g')"
 OUT_EXE="${OUT_DIR}/${OUT_NAME}"
 TMP_FILE="${OUT_EXE}.tmp.c"
+CC_FLAGS="$(sed '2!d' ${1} | sed -e s'/\/\*//g' -e s'/\*\///g')"
 
 # runs the executable
 function run_exe() {
@@ -35,7 +36,7 @@ function run_exe() {
 # ${1} - path to file with source code
 # ${2} - path to place executable
 function compile() {
-    cc -o ${2} ${1}
+    cc -o ${2} ${1} ${CC_FLAGS}
 }
 
 # ensure our out directory exists
@@ -50,7 +51,8 @@ fi
 cd ${MAIN_DIR}
 
 # strip out the 1st line (contains the shebang)
-tail -n +2 "${FILENAME}" > ${TMP_FILE}
+# and 2nd line (contains flags for cc)
+tail -n +3 "${FILENAME}" > ${TMP_FILE}
 
 # compile the file
 compile ${TMP_FILE} ${OUT_EXE}
