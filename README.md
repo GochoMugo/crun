@@ -79,7 +79,7 @@ $ mv crun.sh crun
 
 **The MIT License (MIT)**
 
-Copyright (c) 2015 GochoMugo <mugo@forfuture.co.ke>
+Copyright (c) 2015-2016 GochoMugo <mugo@forfuture.co.ke>
 
 [dl]:https://raw.githubusercontent.com/GochoMugo/crun/master/crun.sh
 
