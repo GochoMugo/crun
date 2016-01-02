@@ -53,6 +53,10 @@ And remember **your C code should start from the 3rd line!** The 1st line always
 holds the shebang. The second line holds the flags to be passed to `cc` inside
 a comment using `/*` and `*/`. If you are **not** using any flags, leave it empty.
 
+Also, you can use bash expressions in the string holding the flags; they
+are evaluated. For example, `/* `pkg-config --libs libuv` */` is totally
+valid.
+
 
 ## installation:
 
