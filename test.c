@@ -1,5 +1,5 @@
 #!/usr/bin/env crun
-
+/* -Wall -O3 */
 #include <stdio.h>
 
 int main(void) {
