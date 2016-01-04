@@ -2,6 +2,8 @@
 # crun
 
 > Run **C** code as script
+>
+> [![Build Status](https://travis-ci.org/GochoMugo/crun.svg?branch=master)](https://travis-ci.org/GochoMugo/crun)
 
 
 ## demo:
