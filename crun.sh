@@ -36,7 +36,7 @@ function run_exe() {
 # ${1} - path to file with source code
 # ${2} - path to place executable
 function compile() {
-    cc -o ${2} ${1} $(eval "echo $CC_FLAGS")
+    cc -o ${2} ${1} -I${MAIN_DIR} -L${MAIN_DIR} $(eval "echo $CC_FLAGS")
 }
 
 # ensure our out directory exists
