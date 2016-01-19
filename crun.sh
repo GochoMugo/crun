@@ -12,6 +12,7 @@ set -e
 }
 
 # global vars
+ARGV=${@:2}
 MAIN_DIR=$(dirname ${1})
 
 # this ensure we always use an absolute path when we do
@@ -26,9 +27,10 @@ OUT_EXE="${OUT_DIR}/${OUT_NAME}"
 TMP_FILE="${OUT_EXE}.tmp.c"
 CC_FLAGS="$(sed '2!d' ${1} | sed -e s'/\/\*//g' -e s'/\*\///g')"
 
+
 # runs the executable
 function run_exe() {
-    ${OUT_EXE}
+    ${OUT_EXE} ${ARGV}
     exit $?
 }
 
