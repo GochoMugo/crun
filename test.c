@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 int main(int argc, char *argv[]) {
-    puts("Hello, world! Koninchwa!");
+    printf("Hello, world! %s", argv[1]);
 
     /* Ensure we can pass arguments */
     if (argc != 2) {

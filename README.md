@@ -16,8 +16,8 @@
 
     #include <stdio.h>
 
-    int main(void) {
-        puts("Hello, world");
+    int main(int argc, char *argv[]) {
+        printf("Hello, world %s!", argv[1]);
         return 0;
     }
     ```
@@ -34,8 +34,10 @@
 3. Run it
 
     ```bash
-    $ ./test.c
+    $ ./test.c Koninchwa
     ```
+
+    **Note:** We can pass arguments to the script! (`Koninchwa`)
 
 
 ## rationale:
