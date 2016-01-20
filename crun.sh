@@ -3,11 +3,42 @@
 # stop on error
 set -e
 
-# ensure we have a path to an existing source file
-[ -f "${1}" ] || {
+# crun metadata
+CRUN_VERSION="0.0.0"
+CRUN_URL="https://github.com/GochoMugo/crun"
+
+# showing help information
+function show_help() {
     echo " usage:"
     echo "    as a shebang in your C file: #!/usr/bin/env crun"
     echo "    direct invocation:           crun filename.c"
+    echo "                                 crun <options>"
+    echo
+    echo " options:"
+    echo "    -h, --help        show this help information and exit"
+    echo "    -v, --version     show version information"
+    echo
+    echo " see ${CRUN_URL} for feature requests and bug reporting"
+    echo
+}
+
+# some arguments processing
+case ${1:-''} in
+    "-v" | "--version" )
+        echo ${CRUN_VERSION}
+        exit
+    ;;
+    "-h" | "--help" )
+        show_help
+        exit
+    ;;
+esac
+
+# ensure we have a path to an existing source file
+[ -f "${1}" ] || {
+    echo " ERROR: NO file path provided"
+    echo
+    show_help
     exit 1
 }
 
