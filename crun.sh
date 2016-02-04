@@ -44,19 +44,15 @@ esac
 
 # global vars
 ARGV=${*:2}
-MAIN_DIR=$(dirname "${1}")
-
-# this ensure we always use an absolute path when we do
-# './filename'
-[ "${MAIN_DIR}" == "." ] && MAIN_DIR=$(pwd)
+MAIN_DIR=$(readlink -f "$(dirname "${1}")")
 
 FILENAME=$(basename "${1}")
 ABS_PATH="${MAIN_DIR}/${FILENAME}"
-OUT_DIR="/tmp/crun/"
+OUT_DIR="/tmp/crun"
 OUT_NAME="$(echo "${ABS_PATH}" | sed s'/\//./g')"
 OUT_EXE="${OUT_DIR}/${OUT_NAME}"
 TMP_FILE="${OUT_EXE}.tmp.c"
-CC_FLAGS="$(sed '2!d' "${1}" | sed -e s'/\/\*//g' -e s'/\*\///g')"
+CC_FLAGS="$(sed '2!d' "${1}" | grep -Eo '\/\*.*\*\/' | sed -e s'/\/\*//g' -e s'/\*\///g')"
 
 
 # runs the executable
@@ -84,8 +80,14 @@ fi
 cd "${MAIN_DIR}"
 
 # strip out the 1st line (contains the shebang)
-# and 2nd line (contains flags for cc)
-tail -n +3 "${FILENAME}" > "${TMP_FILE}"
+tail -n +2 "${FILENAME}" > "${TMP_FILE}"
+
+# remove the CC_FLAGS
+if [ "${CC_FLAGS}" ]
+then
+    grep -v "\"/*${CC_FLAGS}*/\"" "${TMP_FILE}" > "${TMP_FILE}.tmp"
+    mv "${TMP_FILE}.tmp" "${TMP_FILE}"
+fi
 
 # compile the file
 compile "${TMP_FILE}" "${OUT_EXE}"
