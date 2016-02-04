@@ -1,7 +1,7 @@
 
 # crun
 
-> Run **C** code as script
+> Run **C** scripts, just like you would do with Python, Ruby etc.
 >
 > [![Build Status](https://travis-ci.org/GochoMugo/crun.svg?branch=master)](https://travis-ci.org/GochoMugo/crun)
 
@@ -86,6 +86,12 @@ $ cd ~/bin/
 $ wget https://raw.githubusercontent.com/GochoMugo/crun/master/crun.sh
 $ mv crun.sh crun
 ```
+
+
+## contributing:
+
+The **master** branch always remains stable. Development is done on the
+**develop** branch.
 
 
 ## license:
