@@ -53,9 +53,18 @@ away in `/tmp/crun` and run immediately. Subsequent invocations will run
 the compiled executable, rather than re-compile, unless the source file
 has been modified (in which case we compile!).
 
-And remember **your C code should start from the 3rd line!** The 1st line always
-holds the shebang. The second line holds the flags to be passed to `cc` inside
-a comment using `/*` and `*/`. If you are **not** using any flags, leave it empty.
+If you have compilation flags that you need to be passed to `cc`, you
+place them in the **2nd line** separately, inside a comment using `/*` and
+`*/`. For example,
+
+```c
+/* -Wall -O3 */
+```
+
+**Note**: While you can start your code in the 2nd line, it is advisable
+you **avoid** doing so since `crun`, in the case the 2nd line contains `/*`
+and `*/`, will assume it's being fed compilation flags. This may lead
+to some weird compilation errors!
 
 Also, you can use bash expressions in the string holding the flags; they
 are evaluated. For example, `/* $(pkg-config --libs libuv) */` is totally
