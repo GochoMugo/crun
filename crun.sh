@@ -43,25 +43,25 @@ esac
 }
 
 # global vars
-ARGV=${@:2}
-MAIN_DIR=$(dirname ${1})
+ARGV=${*:2}
+MAIN_DIR=$(dirname "${1}")
 
 # this ensure we always use an absolute path when we do
 # './filename'
 [ "${MAIN_DIR}" == "." ] && MAIN_DIR=$(pwd)
 
-FILENAME=$(basename ${1})
+FILENAME=$(basename "${1}")
 ABS_PATH="${MAIN_DIR}/${FILENAME}"
 OUT_DIR="/tmp/crun/"
-OUT_NAME="$(echo ${ABS_PATH} | sed s'/\//./g')"
+OUT_NAME="$(echo "${ABS_PATH}" | sed s'/\//./g')"
 OUT_EXE="${OUT_DIR}/${OUT_NAME}"
 TMP_FILE="${OUT_EXE}.tmp.c"
-CC_FLAGS="$(sed '2!d' ${1} | sed -e s'/\/\*//g' -e s'/\*\///g')"
+CC_FLAGS="$(sed '2!d' "${1}" | sed -e s'/\/\*//g' -e s'/\*\///g')"
 
 
 # runs the executable
 function run_exe() {
-    ${OUT_EXE} ${ARGV}
+    "${OUT_EXE}" ${ARGV}
     exit $?
 }
 
@@ -69,7 +69,7 @@ function run_exe() {
 # ${1} - path to file with source code
 # ${2} - path to place executable
 function compile() {
-    cc -o ${2} ${1} -I${MAIN_DIR} -L${MAIN_DIR} $(eval "echo $CC_FLAGS")
+    cc -o "${2}" "${1}" -I"${MAIN_DIR}" -L"${MAIN_DIR}" $(eval "echo $CC_FLAGS")
 }
 
 # ensure our out directory exists
@@ -81,17 +81,17 @@ if [ -e "${OUT_EXE}" ] && [ "${OUT_EXE}" -nt "${ABS_PATH}" ] ; then
 fi
 
 # chdir to the directory holding the file
-cd ${MAIN_DIR}
+cd "${MAIN_DIR}"
 
 # strip out the 1st line (contains the shebang)
 # and 2nd line (contains flags for cc)
-tail -n +3 "${FILENAME}" > ${TMP_FILE}
+tail -n +3 "${FILENAME}" > "${TMP_FILE}"
 
 # compile the file
-compile ${TMP_FILE} ${OUT_EXE}
+compile "${TMP_FILE}" "${OUT_EXE}"
 
 # remove the temp file
-rm ${TMP_FILE}
+rm "${TMP_FILE}"
 
 # run the executable
 run_exe
