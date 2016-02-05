@@ -16,6 +16,6 @@ clib:
 	cd clib && make
 
 clean:
-	rm -rf crun /tmp/crun/
+	rm -rf crun /tmp/crun*
 
 .PHONY: clean test
