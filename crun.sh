@@ -68,7 +68,7 @@ function compile() {
 }
 
 # ensure our out directory exists
-mkdir -p ${OUT_DIR}
+mkdir -p "${OUT_DIR}"
 
 # if it is already compiled (recent enough), run the executable
 if [ -e "${OUT_EXE}" ] && [ "${OUT_EXE}" -nt "${ABS_PATH}" ] ; then
