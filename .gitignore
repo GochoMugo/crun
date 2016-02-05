@@ -1,2 +1,9 @@
+# dependencies, installed using clib(1)
+deps/
+
+# our clib(1)
+clib/
+
 # used in testing
 crun
+

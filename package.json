@@ -1,0 +1,5 @@
+{
+    "dependencies": {
+        "stephenmathieson/str-replace.c": "0.0.6"
+    }
+}

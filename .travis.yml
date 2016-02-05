@@ -1,2 +1,5 @@
+sudo: required
+dist: trusty
 language: c
+before_script: make deps
 script: make test
