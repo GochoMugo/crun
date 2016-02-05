@@ -15,7 +15,8 @@ int main(void) {
     }
 
     // check to see if this script's executable is compiled to
-    // ${CRUN_CACHE_DIR}/${PWD}/cache.c
+    // ${CRUN_CACHE_DIR}/${PWD}/test/cache.c
+    // the executable will be invoked by make(1) in .. (1 dir up)
     char *dest_path;
     asprintf(&dest_path, "%s/test/cache.c", pwd);
     dest_path = str_replace(dest_path, "/", ".");

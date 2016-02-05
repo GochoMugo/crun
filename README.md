@@ -48,10 +48,11 @@ of an application. It makes C more practical for use. Also, it is really
 handy when you are learning C; everything important is contained in the
 single file.
 
-The first time you invoke a crun script, it is compiled using `cc`, stored
-away in `/tmp/crun` and run immediately. Subsequent invocations will run
-the compiled executable, rather than re-compile, unless the source file
-has been modified (in which case we compile!).
+The first time you invoke a crun script, it is compiled using `cc` in
+the directory holding the script, stored away in `/tmp/crun` and run
+immediately. Subsequent invocations will run the compiled executable,
+rather than re-compile, unless the source file has been modified
+(in which case we compile!).
 
 If you may want to change the directory where the executables are stored,
 you can use the `${CRUN_CACHE_DIR}` variable. This is useful if you wish

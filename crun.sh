@@ -64,7 +64,10 @@ function run_exe() {
 # ${1} - path to file with source code
 # ${2} - path to place executable
 function compile() {
+    # chdir to the directory holding the file
+    pushd "${MAIN_DIR}" > /dev/null
     cc -o "${2}" "${1}" -I"${MAIN_DIR}" -L"${MAIN_DIR}" $(eval "echo $CC_FLAGS")
+    popd > /dev/null
 }
 
 # ensure our out directory exists
@@ -75,11 +78,8 @@ if [ -e "${OUT_EXE}" ] && [ "${OUT_EXE}" -nt "${ABS_PATH}" ] ; then
     run_exe
 fi
 
-# chdir to the directory holding the file
-cd "${MAIN_DIR}"
-
 # strip out the 1st line (contains the shebang)
-tail -n +2 "${FILENAME}" > "${TMP_FILE}"
+tail -n +2 "${ABS_PATH}" > "${TMP_FILE}"
 
 # remove the CC_FLAGS
 if [ "${CC_FLAGS}" ]
