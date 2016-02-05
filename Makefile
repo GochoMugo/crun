@@ -1,5 +1,4 @@
-PATH := $(PWD):$(PATH)
-CLIB := $(PWD)/clib/clib
+PATH := $(PWD):$(PWD)/clib:$(PATH)
 
 test: clean
 	cp crun.sh crun
@@ -9,7 +8,7 @@ test: clean
 	CRUN_CACHE_DIR=/tmp/crun-cache ./test/cache.c
 
 deps: clib
-	$(CLIB) install
+	clib install
 
 clib:
 	sudo apt-get install libcurl4-gnutls-dev -qq
