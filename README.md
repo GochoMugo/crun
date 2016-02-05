@@ -53,6 +53,12 @@ away in `/tmp/crun` and run immediately. Subsequent invocations will run
 the compiled executable, rather than re-compile, unless the source file
 has been modified (in which case we compile!).
 
+If you may want to change the directory where the executables are stored,
+you can use the `${CRUN_CACHE_DIR}` variable. This is useful if you wish
+to cache executables across restarts. If no directory exists at
+`${CRUN_CACHE_DIR}` yet, it will be created using `mkdir -p`. Make sure
+`crun` has permissions to write to the directory.
+
 If you have compilation flags that you need to be passed to `cc`, you
 place them in the **2nd line** separately, inside a comment using `/*` and
 `*/`. For example,
