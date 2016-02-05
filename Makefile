@@ -9,7 +9,7 @@ test: clean
 	CRUN_CACHE_DIR=/tmp/crun-cache ./test/cache.c
 
 deps: clib
-	clib install
+	$(CLIB) install
 
 clib:
 	sudo apt-get install libcurl4-gnutls-dev -qq
