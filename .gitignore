@@ -1,6 +1,9 @@
 # dependencies, installed using clib(1)
 deps/
 
+# our bats(1)
+bats/
+
 # our clib(1)
 clib/
 

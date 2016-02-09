@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+Added:
+
+* add `--create` and `--create-force` for creating template scripts
 
 
 ## [0.2.1][0.2.1] - 5/02/2016
