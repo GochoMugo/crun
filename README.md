@@ -77,6 +77,14 @@ Also, you can use bash expressions in the string holding the flags; they
 are evaluated. For example, `/* $(pkg-config --libs libuv) */` is totally
 valid.
 
+To allow maximum efficiency, you can create a quick template of a script using:
+
+```bash
+$ crun --create my_script
+```
+
+This will create an executable crun script that you can edit to add the meat.
+
 
 ## installation:
 
