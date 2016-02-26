@@ -129,20 +129,22 @@ if [ -e "${OUT_EXE}" ] && [ "${OUT_EXE}" -nt "${ABS_PATH}" ] ; then
 fi
 
 # strip out the 1st line (contains the shebang)
-tail -n +2 "${ABS_PATH}" > "${TMP_FILE}"
+tail -n +2 "${ABS_PATH}" > "${TMP_FILE}.tmp"
+echo | cat - "${TMP_FILE}.tmp" > "${TMP_FILE}"
 
 # remove the CC_FLAGS
 if [ "${CC_FLAGS}" ]
 then
-    tail -n +2 "${TMP_FILE}" > "${TMP_FILE}.tmp"
-    mv "${TMP_FILE}.tmp" "${TMP_FILE}"
+    tail -n +3 "${TMP_FILE}" > "${TMP_FILE}.tmp"
+    echo | cat - "${TMP_FILE}.tmp" > "${TMP_FILE}.tmp1"
+    echo | cat - "${TMP_FILE}.tmp1" > "${TMP_FILE}"
 fi
 
 # compile the file
 compile "${TMP_FILE}" "${OUT_EXE}"
 
 # remove the temp file
-rm "${TMP_FILE}"
+rm "${TMP_FILE}"*
 
 # run the executable
 run_exe

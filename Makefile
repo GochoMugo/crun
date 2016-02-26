@@ -9,7 +9,7 @@ test: clean
 	@echo " !! testing missing CC_FLAGS in script"
 	./test/no-cflags.c
 	@echo " !! testing using bats"
-	bats ./test/create.sh
+	bats ./test/*.sh
 	@echo " !! testing using CRUN_CACHE_DIR"
 	CRUN_CACHE_DIR=/tmp/crun-cache ./test/cache.c
 

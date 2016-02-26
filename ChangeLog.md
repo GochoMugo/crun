@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+Added:
+
+* maintain line numbers (issue #3)
+
 
 ## [0.3.0][0.3.0] - 13/02/2016
 
