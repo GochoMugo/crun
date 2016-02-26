@@ -10,6 +10,7 @@ test: clean
 	./test/no-cflags.c
 	@echo " !! testing using bats"
 	bats ./test/create.sh
+	@echo " !! testing using CRUN_CACHE_DIR"
 	CRUN_CACHE_DIR=/tmp/crun-cache ./test/cache.c
 
 deps: bats clib
