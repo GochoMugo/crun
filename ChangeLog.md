@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
+
+## [0.4.0][0.4.0] - 27/02/2016
+
 Added:
 
 * maintain line numbers (issue #3)
@@ -60,3 +64,4 @@ This is the very first version of `crun`.
 [0.2.0]:https://raw.githubusercontent.com/GochoMugo/crun/4aacc7b2be57f1a467d2abc72f97d7b4ebfcd2a4/crun.sh
 [0.2.1]:https://raw.githubusercontent.com/GochoMugo/crun/fddd4bdc3a3b73d988551529da2ba2cd8f6b566e/crun.sh
 [0.3.0]:https://raw.githubusercontent.com/GochoMugo/crun/b37deaecfda33533f0e1a9333bef2e5bfece5c8b/crun.sh
+[0.4.0]:https://raw.githubusercontent.com/GochoMugo/crun/4dfcaaf30ea7a2703f1168155e85dbb50a4f61c2/crun.sh
