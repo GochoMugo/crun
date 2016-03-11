@@ -77,7 +77,11 @@ Also, you can use bash expressions in the string holding the flags; they
 are evaluated. For example, `/* $(pkg-config --libs libuv) */` is totally
 valid.
 
-To allow maximum efficiency, you can create a quick template of a script using:
+
+### extras:
+
+To allow maximum efficiency, you can create a quick template of a script
+using:
 
 ```bash
 $ crun --create my_script
@@ -85,12 +89,19 @@ $ crun --create my_script
 
 This will create an executable crun script that you can edit to add the meat.
 
+In some cases, you want the script re-compiled, maybe you've modified some
+library files. To bypass the cache:
+
+```bash
+$ crun --force-compile my_script
+```
+
 
 ## installation:
 
 It's simple!
 
-1. [Download the bash script][dl]
+1. [Download crun.sh][dl]
 2. Rename it to `crun`
 3. Place it in a directory in your `$PATH`.
 
