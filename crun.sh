@@ -12,13 +12,14 @@ function show_help() {
     echo " usage:"
     echo "    as a shebang in your C file: #!/usr/bin/env crun"
     echo "    direct invocation:"
-    echo "          crun filename.c"
+    echo "          crun [--force-compile] filename.c"
     echo "          crun --create|create-force <path>"
     echo "          crun --help|version"
     echo
     echo " options:"
     echo "    -c,  --create        create a template script"
     echo "    -cf, --create-force  same as '-c', but allow overwriting"
+    echo "    -fc, --force-compile compile script, regardless..."
     echo "    -h,  --help          show this help information and exit"
     echo "    -v,  --version       show version information"
     echo
@@ -64,8 +65,15 @@ function new() {
 }
 
 
+INPUT_FILENAME=
+INPUT_FORCE_COMPILE=false
+INPUT_XARGS=
+
+
 # some arguments processing
-case ${1:-''} in
+for arg in "${@}"
+do
+case ${arg} in
     "-v" | "--version" )
         echo ${CRUN_VERSION}
         exit
@@ -82,27 +90,41 @@ case ${1:-''} in
         new "${2}" "force"
         exit $?
     ;;
+    "-fc" | "--force-compile" )
+        INPUT_FORCE_COMPILE=true
+    ;;
+    * )
+        if [ -z "${INPUT_FILENAME}" ]
+        then
+            INPUT_FILENAME=${arg}
+        else
+            INPUT_XARGS="${INPUT_XARGS} ${arg}"
+        fi
+    ;;
 esac
+done
+
 
 # ensure we have a path to an existing source file
-[ -f "${1}" ] || {
+[ -f "${INPUT_FILENAME}" ] || {
     echo " ERROR: NO regular file at the path provided"
     echo
     show_help
     exit 1
 }
 
-# global vars
-ARGV=${*:2}
-MAIN_DIR=$(readlink -f "$(dirname "${1}")")
 
-FILENAME=$(basename "${1}")
+# global vars
+ARGV=${INPUT_XARGS}
+MAIN_DIR=$(readlink -f "$(dirname "${INPUT_FILENAME}")")
+
+FILENAME=$(basename "${INPUT_FILENAME}")
 ABS_PATH="${MAIN_DIR}/${FILENAME}"
 OUT_DIR="${CRUN_CACHE_DIR:-/tmp/crun}"
 OUT_NAME="$(echo "${ABS_PATH}" | sed s'/\//./g')"
 OUT_EXE="${OUT_DIR}/${OUT_NAME}"
 TMP_FILE="${OUT_EXE}.tmp.c"
-CC_FLAGS="$(sed '2!d' "${1}" | grep -Eo '\/\*.*\*\/' | sed -e s'/^\/\*//' -e s'/\*\/$//')"
+CC_FLAGS="$(sed '2!d' "${ABS_PATH}" | grep -Eo '\/\*.*\*\/' | sed -e s'/^\/\*//' -e s'/\*\/$//')"
 
 # runs the executable
 function run_exe() {
@@ -124,7 +146,7 @@ function compile() {
 mkdir -p "${OUT_DIR}"
 
 # if it is already compiled (recent enough), run the executable
-if [ -e "${OUT_EXE}" ] && [ "${OUT_EXE}" -nt "${ABS_PATH}" ] ; then
+if [ "${INPUT_FORCE_COMPILE}" == false ] && [ -e "${OUT_EXE}" ] && [ "${OUT_EXE}" -nt "${ABS_PATH}" ] ; then
     run_exe
 fi
 
