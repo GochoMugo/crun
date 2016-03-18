@@ -12,7 +12,7 @@ function show_help() {
     echo " usage:"
     echo "    as a shebang in your C file: #!/usr/bin/env crun"
     echo "    direct invocation:"
-    echo "          crun [--force-compile] filename.c"
+    echo "          crun [--force-compile|--just-compile] filename.c"
     echo "          crun --create|create-force <path>"
     echo "          crun --help|version"
     echo
@@ -20,6 +20,7 @@ function show_help() {
     echo "    -c,  --create        create a template script"
     echo "    -cf, --create-force  same as '-c', but allow overwriting"
     echo "    -fc, --force-compile compile script, regardless..."
+    echo "    -jc, --just-compile  compile script and stop"
     echo "    -h,  --help          show this help information and exit"
     echo "    -v,  --version       show version information"
     echo
@@ -67,6 +68,7 @@ function new() {
 
 INPUT_FILENAME=
 INPUT_FORCE_COMPILE=false
+INPUT_JUST_COMPILE=false
 INPUT_XARGS=
 
 
@@ -92,6 +94,9 @@ case ${arg} in
     ;;
     "-fc" | "--force-compile" )
         INPUT_FORCE_COMPILE=true
+    ;;
+    "-jc" | "--just-compile" )
+        INPUT_JUST_COMPILE=true
     ;;
     * )
         if [ -z "${INPUT_FILENAME}" ]
@@ -136,9 +141,17 @@ function run_exe() {
 # ${1} - path to file with source code
 # ${2} - path to place executable
 function compile() {
+    local more_args=
+
+    # if we are just compiling, then the args are for compilation
+    if [ "${INPUT_JUST_COMPILE}" == true ]
+    then
+        more_args="${INPUT_XARGS}"
+    fi
+
     # chdir to the directory holding the file
     pushd "${MAIN_DIR}" > /dev/null
-    cc -o "${2}" "${1}" -I"${MAIN_DIR}" -L"${MAIN_DIR}" $(eval "echo $CC_FLAGS")
+    cc -o "${2}" "${1}" -I"${MAIN_DIR}" -L"${MAIN_DIR}" $(eval "echo $CC_FLAGS") ${more_args}
     popd > /dev/null
 }
 
@@ -146,7 +159,10 @@ function compile() {
 mkdir -p "${OUT_DIR}"
 
 # if it is already compiled (recent enough), run the executable
-if [ "${INPUT_FORCE_COMPILE}" == false ] && [ -e "${OUT_EXE}" ] && [ "${OUT_EXE}" -nt "${ABS_PATH}" ] ; then
+if [ "${INPUT_FORCE_COMPILE}" == false ] && \
+   [ -e "${OUT_EXE}" ] && \
+   [ "${OUT_EXE}" -nt "${ABS_PATH}" ] && \
+   [ "${INPUT_JUST_COMPILE}" == false ] ; then
     run_exe
 fi
 
@@ -168,6 +184,11 @@ compile "${TMP_FILE}" "${OUT_EXE}"
 # remove the temp file
 rm "${TMP_FILE}"*
 
-# run the executable
-run_exe
-
+# run the executable, if we are NOT just compiling. Otherwise, echo
+# the path to the executable
+if [ "${INPUT_JUST_COMPILE}" == false ]
+then
+    run_exe
+else
+    echo "${OUT_EXE}"
+fi

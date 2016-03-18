@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 Added:
 
 * use `-fc, --force-compile` to force compilation of the script (issue #4)
+* use `-jc, --just-compile` for compiling script without running (issue #5)
 
 
 ## [0.4.0][0.4.0] - 27/02/2016

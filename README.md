@@ -96,6 +96,24 @@ library files. To bypass the cache:
 $ crun --force-compile my_script
 ```
 
+Sometimes, you may want to debug your script with `gdb`, or you just want to
+skip running the compiled executable:
+
+```bash
+$ crun --just-compile my_script
+```
+
+Since `--just-compile` will make crun **not** run your executable, any arguments
+passed will be considered to be more compilation flags to use. It also
+echo's back the path to the compiled executable. So you could do something
+like:
+
+```bash
+$ gdb `crun --just-compile script.c -Wall -g`
+$ valgrind --leak-check=yes `crun --just-compile script.c -Wall -g` arg1 arg2
+```
+
+
 
 ## installation:
 
