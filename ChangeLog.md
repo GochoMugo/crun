@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
+## [0.5.0][0.5.0] - 18/03/2016
+
 Added:
 
 * use `-fc, --force-compile` to force compilation of the script (issue #4)

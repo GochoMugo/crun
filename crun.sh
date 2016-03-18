@@ -4,7 +4,7 @@
 set -e
 
 # crun metadata
-CRUN_VERSION="0.4.0"
+CRUN_VERSION="0.5.0"
 CRUN_URL="https://github.com/GochoMugo/crun"
 
 # showing help information
