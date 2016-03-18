@@ -72,3 +72,4 @@ This is the very first version of `crun`.
 [0.2.1]:https://raw.githubusercontent.com/GochoMugo/crun/fddd4bdc3a3b73d988551529da2ba2cd8f6b566e/crun.sh
 [0.3.0]:https://raw.githubusercontent.com/GochoMugo/crun/b37deaecfda33533f0e1a9333bef2e5bfece5c8b/crun.sh
 [0.4.0]:https://raw.githubusercontent.com/GochoMugo/crun/4dfcaaf30ea7a2703f1168155e85dbb50a4f61c2/crun.sh
+[0.5.0]:https://raw.githubusercontent.com/GochoMugo/crun/dade44e94e7cb153b004b6756d70f22ef8b4f2e5/crun.sh
