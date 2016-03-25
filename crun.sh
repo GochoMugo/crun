@@ -12,13 +12,14 @@ function show_help() {
     echo " usage:"
     echo "    as a shebang in your C file: #!/usr/bin/env crun"
     echo "    direct invocation:"
-    echo "          crun [--force-compile|--just-compile] filename.c"
     echo "          crun --create|create-force <path>"
     echo "          crun --help|version"
+    echo "          crun [--<option>] filename.c"
     echo
     echo " options:"
     echo "    -c,  --create        create a template script"
     echo "    -cf, --create-force  same as '-c', but allow overwriting"
+    echo "    -de, --do-eval       enable bash eval"
     echo "    -fc, --force-compile compile script, regardless..."
     echo "    -jc, --just-compile  compile script and stop"
     echo "    -h,  --help          show this help information and exit"
@@ -67,9 +68,17 @@ function new() {
 
 
 INPUT_FILENAME=
+INPUT_DO_EVAL=false
 INPUT_FORCE_COMPILE=false
 INPUT_JUST_COMPILE=false
 INPUT_XARGS=
+
+
+# processing environment variables
+if [ -n "${CRUN_DO_EVAL}" ]
+then
+    INPUT_DO_EVAL=true
+fi
 
 
 # some arguments processing
@@ -91,6 +100,9 @@ case ${arg} in
     "-cf" | "--create-force" )
         new "${2}" "force"
         exit $?
+    ;;
+    "-de" | "--do-eval" )
+        INPUT_DO_EVAL=true
     ;;
     "-fc" | "--force-compile" )
         INPUT_FORCE_COMPILE=true
@@ -141,19 +153,31 @@ function run_exe() {
 # ${1} - path to file with source code
 # ${2} - path to place executable
 function compile() {
-    local more_args=
+    local args=
+
+    # chdir to the directory holding the file
+    pushd "${MAIN_DIR}" > /dev/null
+
+    # if eval is enabled, do so
+    if [ "${INPUT_DO_EVAL}" == true ]
+    then
+        args=$(eval "echo $CC_FLAGS")
+    else
+        args="${CC_FLAGS}"
+    fi
 
     # if we are just compiling, then the args are for compilation
     if [ "${INPUT_JUST_COMPILE}" == true ]
     then
-        more_args="${INPUT_XARGS}"
+        args="${args} ${INPUT_XARGS}"
     fi
 
-    # chdir to the directory holding the file
-    pushd "${MAIN_DIR}" > /dev/null
-    cc -o "${2}" "${1}" -I"${MAIN_DIR}" -L"${MAIN_DIR}" $(eval "echo $CC_FLAGS") ${more_args}
+    # do compilation
+    cc -o "${2}" "${1}" -I"${MAIN_DIR}" -L"${MAIN_DIR}" ${args}
+
     popd > /dev/null
 }
+
 
 # ensure our out directory exists
 mkdir -p "${OUT_DIR}"

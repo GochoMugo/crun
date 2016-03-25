@@ -1,4 +1,5 @@
 PATH := $(PWD):$(PWD)/bats/bin:$(PWD)/clib:$(PATH)
+export CRUN_DO_EVAL=1
 
 test: clean
 	cp crun.sh crun
