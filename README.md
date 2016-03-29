@@ -91,6 +91,8 @@ $ export CRUN_DO_EVAL=1  # you could place this in your ~/.bashrc (or equivalent
 $ crun --do-eval filename.c
 ```
 
+**Note**: Do **not** run scripts you do **not** trust, **even if** eval is disabled! Always
+remember, **no** system/application can ever be 100% secure!
 
 To allow maximum efficiency, you can create a quick template of a script
 using:
