@@ -73,12 +73,26 @@ you **avoid** doing so since `crun`, in the case the 2nd line contains `/*`
 and `*/`, will assume it's being fed compilation flags. This may lead
 to some weird compilation errors!
 
-Also, you can use bash expressions in the string holding the flags; they
-are evaluated. For example, `/* $(pkg-config --libs libuv) */` is totally
-valid.
-
 
 ### extras:
+
+By default, bash expressions in the string holding the flags are **not**
+are evaluated. This is a neat feature **but** I do understand it adds a new edge
+in the attack graph. You will need to **explicitly** enable this feature, using
+the environment variable `${CRUN_DO_EVAL}` or the command-line argument
+`--do-eval`. If enabled, a string such as `/* $(pkg-config --libs libuv) */`
+for the compilation flags will be evaluated. So,
+
+```bash
+$ export CRUN_DO_EVAL=1  # you could place this in your ~/.bashrc (or equivalent)
+
+# OR
+
+$ crun --do-eval filename.c
+```
+
+**Note**: Do **not** run scripts you do **not** trust, **even if** eval is disabled! Always
+remember, **no** system/application can ever be 100% secure!
 
 To allow maximum efficiency, you can create a quick template of a script
 using:

@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+Changed:
+
+* use `${CRUN_DO_EVAL}`/`--do-eval` to enable evaluation of the bash string (issue #6)
+
 
 ## [0.5.0][0.5.0] - 18/03/2016
 
