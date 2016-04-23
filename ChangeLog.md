@@ -1,4 +1,3 @@
-
 # Change Log
 
 All notable changes to this project will be documented in this file.
@@ -73,11 +72,11 @@ This is the very first version of `crun`.
 
 
 <!-- Release links are placed here for easier updating -->
-[0.0.0]:https://raw.githubusercontent.com/GochoMugo/crun/43d7201f07cabfb01fe68ba5ba68b5156db78c27/crun.sh
-[0.1.0]:https://raw.githubusercontent.com/GochoMugo/crun/411cecc2423344226863fd84d1241b0eebe1ae24/crun.sh
-[0.2.0]:https://raw.githubusercontent.com/GochoMugo/crun/4aacc7b2be57f1a467d2abc72f97d7b4ebfcd2a4/crun.sh
-[0.2.1]:https://raw.githubusercontent.com/GochoMugo/crun/fddd4bdc3a3b73d988551529da2ba2cd8f6b566e/crun.sh
-[0.3.0]:https://raw.githubusercontent.com/GochoMugo/crun/b37deaecfda33533f0e1a9333bef2e5bfece5c8b/crun.sh
-[0.4.0]:https://raw.githubusercontent.com/GochoMugo/crun/4dfcaaf30ea7a2703f1168155e85dbb50a4f61c2/crun.sh
-[0.5.0]:https://raw.githubusercontent.com/GochoMugo/crun/dade44e94e7cb153b004b6756d70f22ef8b4f2e5/crun.sh
-[0.6.0]:https://raw.githubusercontent.com/GochoMugo/crun/71fd17f17d9e59924af9dd57ef0bfd176ae22891/crun.sh
+[0.0.0]:https://github.com/GochoMugo/crun/releases/tag/v0.0.0
+[0.1.0]:https://github.com/GochoMugo/crun/releases/tag/v0.1.0
+[0.2.0]:https://github.com/GochoMugo/crun/releases/tag/v0.2.0
+[0.2.1]:https://github.com/GochoMugo/crun/releases/tag/v0.2.1
+[0.3.0]:https://github.com/GochoMugo/crun/releases/tag/v0.3.0
+[0.4.0]:https://github.com/GochoMugo/crun/releases/tag/v0.4.0
+[0.5.0]:https://github.com/GochoMugo/crun/releases/tag/v0.5.0
+[0.6.0]:https://github.com/GochoMugo/crun/releases/tag/v0.6.0
