@@ -140,7 +140,7 @@ ABS_PATH="${MAIN_DIR}/${FILENAME}"
 OUT_DIR="${CRUN_CACHE_DIR:-/tmp/crun}"
 OUT_NAME="$(echo "${ABS_PATH}" | sed s'/\//./g')"
 OUT_EXE="${OUT_DIR}/${OUT_NAME}"
-TMP_FILE="${OUT_EXE}.tmp.c"
+TMP_FILE="${OUT_DIR}/tmp.${OUT_NAME}"
 CC_FLAGS="$(sed '2!d' "${ABS_PATH}" | grep -Eo '\/\*.*\*\/' | sed -e s'/^\/\*//' -e s'/\*\/$//')"
 
 # runs the executable
@@ -154,6 +154,7 @@ function run_exe() {
 # ${2} - path to place executable
 function compile() {
     local args=
+    local compiler=cc
 
     # chdir to the directory holding the file
     pushd "${MAIN_DIR}" > /dev/null
@@ -172,8 +173,15 @@ function compile() {
         args="${args} ${INPUT_XARGS}"
     fi
 
+    # if the file does not have '.c' extension, we assume it
+    # is c++
+    if [[ "${1}" != *.c ]]
+    then
+        compiler=g++
+    fi
+
     # do compilation
-    cc -o "${2}" "${1}" -I"${MAIN_DIR}" -L"${MAIN_DIR}" ${args}
+    ${compiler} -o "${2}" "${1}" -I"${MAIN_DIR}" -L"${MAIN_DIR}" ${args}
 
     popd > /dev/null
 }

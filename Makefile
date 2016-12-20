@@ -13,6 +13,8 @@ test: clean
 	bats ./test/*.sh
 	@echo " !! testing using CRUN_CACHE_DIR"
 	CRUN_CACHE_DIR=/tmp/crun-cache ./test/cache.c
+	@echo " !! testing compiling CPP code"
+	./test/cpp.cc
 
 deps: bats clib
 	clib install

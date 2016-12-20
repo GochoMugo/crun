@@ -6,6 +6,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+Added:
+
+* add support for C++ files
+
 
 ## [0.6.0][0.6.0] - 29/03/2016
 
