@@ -7,6 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 
+
+
+## [0.7.0][0.7.0] - 20/12/2016
+
+Added:
+
+* add support for C++ files
+
+
 ## [0.6.0][0.6.0] - 29/03/2016
 
 Changed:
@@ -80,3 +89,4 @@ This is the very first version of `crun`.
 [0.4.0]:https://github.com/GochoMugo/crun/releases/tag/v0.4.0
 [0.5.0]:https://github.com/GochoMugo/crun/releases/tag/v0.5.0
 [0.6.0]:https://github.com/GochoMugo/crun/releases/tag/v0.6.0
+[0.7.0]:https://github.com/GochoMugo/crun/releases/tag/v0.7.0
