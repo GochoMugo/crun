@@ -10,7 +10,7 @@ CRUN_URL="https://github.com/GochoMugo/crun"
 # showing help information
 function show_help() {
     echo " usage:"
-    echo "    as a shebang in your C file: #!/usr/bin/env crun"
+    echo "    as a shebang in your C/C++ file: #!/usr/bin/env crun"
     echo "    direct invocation:"
     echo "          crun --create|create-force <path>"
     echo "          crun --help|version"
@@ -27,6 +27,18 @@ function show_help() {
     echo
     echo " see ${CRUN_URL} for feature requests and bug reporting"
     echo
+}
+
+
+# Return 0 if file does not have '.c' extension,
+# thus assuming it contains C++ code. Otherwise, 1
+# ${1} - file path
+function is_cpp_file() {
+    if [[ "${1}" != *.c ]]
+    then
+        return 0
+    fi
+    return 1
 }
 
 
@@ -140,7 +152,7 @@ ABS_PATH="${MAIN_DIR}/${FILENAME}"
 OUT_DIR="${CRUN_CACHE_DIR:-/tmp/crun}"
 OUT_NAME="$(echo "${ABS_PATH}" | sed s'/\//./g')"
 OUT_EXE="${OUT_DIR}/${OUT_NAME}"
-TMP_FILE="${OUT_DIR}/tmp.${OUT_NAME}"
+TMP_FILE="${OUT_DIR}/tmp${OUT_NAME}"
 CC_FLAGS="$(sed '2!d' "${ABS_PATH}" | grep -Eo '\/\*.*\*\/' | sed -e s'/^\/\*//' -e s'/\*\/$//')"
 
 # runs the executable
@@ -173,12 +185,8 @@ function compile() {
         args="${args} ${INPUT_XARGS}"
     fi
 
-    # if the file does not have '.c' extension, we assume it
-    # is c++
-    if [[ "${1}" != *.c ]]
-    then
-        compiler=g++
-    fi
+    # change compile if it is a CPP file
+    is_cpp_file "${1}" && compiler=g++
 
     # do compilation
     ${compiler} -o "${2}" "${1}" -I"${MAIN_DIR}" -L"${MAIN_DIR}" ${args}
