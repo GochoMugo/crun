@@ -154,6 +154,11 @@ The **master** branch always remains stable. Development is done on the
 **develop** branch.
 
 
+## references:
+
+* Inspired by [gorun](https://github.com/erning/gorun).
+
+
 ## license:
 
 **The MIT License (MIT)**
