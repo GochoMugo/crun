@@ -1,5 +1,6 @@
 # Make `crun` command available.
 PATH := $(PWD):$(PATH)
+PREFIX := $(HOME)
 
 export CRUN_DO_EVAL=1
 
@@ -27,4 +28,7 @@ test: clean
 clean:
 	rm -rf crun /tmp/crun*
 
-.PHONY: clean test
+install:
+	cp crun.sh ${PREFIX}/bin/crun
+
+.PHONY: clean install test
