@@ -1,8 +1,8 @@
 #!/usr/bin/env crun
-/* ../deps/*/*.c -I"../deps" */
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <str-replace/str-replace.h>
+#include <string.h>
 
 int main(void) {
     char *pwd = getenv("PWD");
@@ -19,7 +19,11 @@ int main(void) {
     // the executable will be invoked by make(1) in .. (1 dir up)
     char *dest_path;
     asprintf(&dest_path, "%s/test/cache.c", pwd);
-    dest_path = str_replace(dest_path, "/", ".");
+    for (int i = 0; i < strlen(dest_path); i++) {
+        if (dest_path[i] == '/') {
+            dest_path[i] = '.';
+        }
+    }
     asprintf(&dest_path, "%s/%s", cache_dir, dest_path);
 
     // just try opening the file

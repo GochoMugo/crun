@@ -9,9 +9,9 @@ path="${BATS_TEST_DIRNAME}/force-compile.c"
 
 @test "--force-compile: causes file to be compiled regardless..." {
     export CRUN_ENV_VAR='"first"'
-    output=`crun "${path}"`
+    output=$(crun "${path}")
     echo "${output}" | grep 'first'
     export CRUN_ENV_VAR='"second"'
-    output=`crun --force-compile "${path}"`
+    output=$(crun --force-compile "${path}")
     echo "${output}" | grep 'second'
 }

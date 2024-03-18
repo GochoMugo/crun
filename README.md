@@ -150,8 +150,13 @@ $ mv crun.sh crun
 
 ## contributing:
 
-The **master** branch always remains stable. Development is done on the
-**develop** branch.
+```bash
+# Run tests.
+make test
+
+# Clean up after tests.
+make clean
+```
 
 
 ## references:

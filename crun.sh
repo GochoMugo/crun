@@ -145,7 +145,12 @@ done
 
 # global vars
 ARGV=${INPUT_XARGS}
-MAIN_DIR=$(readlink -f "$(dirname "${INPUT_FILENAME}")")
+MAIN_DIR="$(dirname "${INPUT_FILENAME}")"
+if command -v greadlink >/dev/null 2>&1 ; then
+    MAIN_DIR="$(greadlink -f "${MAIN_DIR}")"
+elif command -v readlink >/dev/null 2>&1 ; then
+    MAIN_DIR="$(readlink -f "${MAIN_DIR}")"
+fi
 
 FILENAME=$(basename "${INPUT_FILENAME}")
 ABS_PATH="${MAIN_DIR}/${FILENAME}"

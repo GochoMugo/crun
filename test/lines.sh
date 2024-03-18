@@ -2,7 +2,6 @@
 # testing that lines are kept intact
 
 path="${BATS_TMPDIR}/lines.c"
-lines=
 
 function setup() {
     rm -f "${path}"
@@ -13,7 +12,7 @@ function setup() {
 @test "line numbers are preserved" {
     crun --create "${path}"
     echo CATCHME >> "${path}"
-    lines="$(cat "${path}" | wc -l)"
+    lines="$(wc -l < "${path}" | tr -d ' ')"
     ! output=$(crun "${path}" 2>&1)
     echo "${output}" | grep ".c:${lines}:1:"
 }
