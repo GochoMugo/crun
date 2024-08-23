@@ -127,7 +127,10 @@ case ${arg} in
         then
             INPUT_FILENAME=${arg}
         else
-            INPUT_XARGS="${INPUT_XARGS} ${arg}"
+            if [[ -n "${INPUT_XARGS}" ]] ; then
+               INPUT_XARGS="${INPUT_XARGS} "
+            fi
+            INPUT_XARGS="${INPUT_XARGS}${arg}"
         fi
     ;;
 esac
@@ -162,7 +165,7 @@ CC_FLAGS="$(sed '2!d' "${ABS_PATH}" | grep -Eo '\/\*.*\*\/' | sed -e s'/^\/\*//'
 
 # runs the executable
 function run_exe() {
-    "${OUT_EXE}" ${ARGV}
+    "${OUT_EXE}" "${ARGV}"
     exit $?
 }
 
