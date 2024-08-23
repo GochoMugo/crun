@@ -4,6 +4,23 @@ PREFIX := $(HOME)
 
 export CRUN_DO_EVAL=1
 
+help:
+	@echo
+	@echo " clean        Clean working directory"
+	@echo " deps         Install deps"
+	@echo " install      Install crun"
+	@echo " test         Run tests"
+
+clean:
+	rm -rf crun /tmp/crun*
+
+deps:
+	git submodule init
+	git submodule update
+
+install:
+	cp crun.sh ${PREFIX}/bin/crun
+
 test: clean
 	cp crun.sh crun
 
@@ -25,10 +42,4 @@ test: clean
 	@echo " !! testing using bats"
 	./deps/bats/bin/bats --timing ./test/*.sh
 
-clean:
-	rm -rf crun /tmp/crun*
-
-install:
-	cp crun.sh ${PREFIX}/bin/crun
-
-.PHONY: clean install test
+.PHONY: clean deps help install test
