@@ -2,8 +2,7 @@
 
 > Run **C/C++** scripts, just like you would do with Python, Ruby etc.
 >
-> [![Build Status](https://travis-ci.org/GochoMugo/crun.svg?branch=master)](https://travis-ci.org/GochoMugo/crun)
-
+> [![Tests](https://github.com/GochoMugo/crun/actions/workflows/test.yml/badge.svg)](https://github.com/GochoMugo/crun/actions/workflows/test.yml)
 
 ## demo:
 
@@ -19,8 +18,7 @@
         printf("Hello, world %s!", argv[1]);
         return 0;
     }
-    ```
-
+    ``
     **Note:** We added a shebang on the 1st line! (`#!/usr/bin/env crun`) <br/>
     **Note:** We added flags to be used in compilation in 2nd line! (`-Wall -O3`)
 
