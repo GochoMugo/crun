@@ -18,7 +18,8 @@
         printf("Hello, world %s!", argv[1]);
         return 0;
     }
-    ``
+    ```
+
     **Note:** We added a shebang on the 1st line! (`#!/usr/bin/env crun`) <br/>
     **Note:** We added flags to be used in compilation in 2nd line! (`-Wall -O3`)
 
