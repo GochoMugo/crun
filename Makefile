@@ -42,4 +42,6 @@ test: clean
 	@echo " !! testing using bats"
 	./deps/bats/bin/bats --timing ./test/*.sh
 
+	rm crun
+
 .PHONY: clean deps help install test
