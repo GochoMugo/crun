@@ -83,7 +83,7 @@ INPUT_FILENAME=
 INPUT_DO_EVAL=false
 INPUT_FORCE_COMPILE=false
 INPUT_JUST_COMPILE=false
-INPUT_XARGS=
+declare -a INPUT_XARGS
 
 
 # processing environment variables
@@ -127,10 +127,7 @@ case ${arg} in
         then
             INPUT_FILENAME=${arg}
         else
-            if [[ -n "${INPUT_XARGS}" ]] ; then
-               INPUT_XARGS="${INPUT_XARGS} "
-            fi
-            INPUT_XARGS="${INPUT_XARGS}${arg}"
+            INPUT_XARGS+=("${arg}")
         fi
     ;;
 esac
@@ -147,7 +144,6 @@ done
 
 
 # global vars
-ARGV=${INPUT_XARGS}
 MAIN_DIR="$(dirname "${INPUT_FILENAME}")"
 if command -v greadlink >/dev/null 2>&1 ; then
     MAIN_DIR="$(greadlink -f "${MAIN_DIR}")"
@@ -165,7 +161,7 @@ CC_FLAGS="$(sed '2!d' "${ABS_PATH}" | grep -Eo '\/\*.*\*\/' | sed -e s'/^\/\*//'
 
 # runs the executable
 function run_exe() {
-    "${OUT_EXE}" "${ARGV}"
+    "${OUT_EXE}" "${INPUT_XARGS[@]}"
     exit $?
 }
 
@@ -190,7 +186,7 @@ function compile() {
     # if we are just compiling, then the args are for compilation
     if [ "${INPUT_JUST_COMPILE}" == true ]
     then
-        args="${args} ${INPUT_XARGS}"
+        args="${args} ${INPUT_XARGS[@]}"
     fi
 
     # change compile if it is a CPP file
