@@ -26,6 +26,7 @@ test: clean
 
 	@echo " !! testing passing arguments to script"
 	@./test/args.c Koninchwa! | grep 'Koninchwa' >/dev/null 2>&1
+	@./test/args.c --version | grep -- --version >/dev/null 2>&1
 
 	@echo " !! testing use of CC_FLAGS in script"
 	@./test/cflags.c 2>&1 | grep 'implicit declaration' >/dev/null 2>&1

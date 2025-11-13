@@ -96,41 +96,42 @@ fi
 # some arguments processing
 for arg in "${@}"
 do
-case ${arg} in
-    "-v" | "--version" )
-        echo ${CRUN_VERSION}
-        exit
-    ;;
-    "-h" | "--help" )
-        show_help
-        exit
-    ;;
-    "-c" | "--create" )
-        new "${2}"
-        exit $?
-    ;;
-    "-cf" | "--create-force" )
-        new "${2}" "force"
-        exit $?
-    ;;
-    "-de" | "--do-eval" )
-        INPUT_DO_EVAL=true
-    ;;
-    "-fc" | "--force-compile" )
-        INPUT_FORCE_COMPILE=true
-    ;;
-    "-jc" | "--just-compile" )
-        INPUT_JUST_COMPILE=true
-    ;;
-    * )
-        if [ -z "${INPUT_FILENAME}" ]
-        then
+    if [[ -n "${INPUT_FILENAME}" ]]
+    then
+        INPUT_XARGS+=("${arg}")
+        continue
+    fi
+
+    case ${arg} in
+        "-v" | "--version" )
+            echo ${CRUN_VERSION}
+            exit
+        ;;
+        "-h" | "--help" )
+            show_help
+            exit
+        ;;
+        "-c" | "--create" )
+            new "${2}"
+            exit $?
+        ;;
+        "-cf" | "--create-force" )
+            new "${2}" "force"
+            exit $?
+        ;;
+        "-de" | "--do-eval" )
+            INPUT_DO_EVAL=true
+        ;;
+        "-fc" | "--force-compile" )
+            INPUT_FORCE_COMPILE=true
+        ;;
+        "-jc" | "--just-compile" )
+            INPUT_JUST_COMPILE=true
+        ;;
+        * )
             INPUT_FILENAME=${arg}
-        else
-            INPUT_XARGS+=("${arg}")
-        fi
-    ;;
-esac
+        ;;
+    esac
 done
 
 
