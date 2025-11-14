@@ -142,8 +142,19 @@ For example,
 
 ```bash
 $ cd ~/bin/
-$ wget https://raw.githubusercontent.com/GochoMugo/crun/master/crun.sh
+$ wget https://raw.githubusercontent.com/GochoMugo/crun/refs/tags/v0.7.1/crun.sh
 $ mv crun.sh crun
+```
+
+Alternatively, you could clone this repo and run `make install`.
+By default (unless `$PREFIX` is set), the `crun` program is placed at
+`~/bin/crun`. For example,
+
+```bash
+$ git clone https://github.com/GochoMugo/crun.git
+$ git checkout v0.7.1
+$ cd crun
+$ make install
 ```
 
 
@@ -169,4 +180,4 @@ make clean
 
 Copyright (c) 2015-2016 GochoMugo <mugo@forfuture.co.ke>
 
-[dl]:https://raw.githubusercontent.com/GochoMugo/crun/master/crun.sh
+[dl]: https://raw.githubusercontent.com/GochoMugo/crun/refs/tags/v0.7.1/crun.sh

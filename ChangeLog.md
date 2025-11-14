@@ -7,6 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 
+## [0.7.1][0.7.1] - 14/11/2025
+
+Fixed:
+
+* Fixed passing options to .c script.
+* Fixed arguments being split by space.
 
 
 ## [0.7.0][0.7.0] - 20/12/2016
@@ -90,3 +96,4 @@ This is the very first version of `crun`.
 [0.5.0]:https://github.com/GochoMugo/crun/releases/tag/v0.5.0
 [0.6.0]:https://github.com/GochoMugo/crun/releases/tag/v0.6.0
 [0.7.0]:https://github.com/GochoMugo/crun/releases/tag/v0.7.0
+[0.7.1]:https://github.com/GochoMugo/crun/releases/tag/v0.7.1
