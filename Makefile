@@ -19,6 +19,7 @@ deps:
 	git submodule update
 
 install:
+	mkdir -p ${PREFIX}/bin
 	cp crun.sh ${PREFIX}/bin/crun
 
 test: clean
